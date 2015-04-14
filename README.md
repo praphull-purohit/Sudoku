@@ -1,5 +1,6 @@
 # Sudoku
-Sudoku
+Node.js Sudoku
+
 Open source Sudoku implementation in Node.js
 
 Contains a self-contained Node.js server that runs on port 8080 by default, but is configurable.
