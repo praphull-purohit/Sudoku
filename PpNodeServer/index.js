@@ -62,7 +62,7 @@ function dispatch(req, res, home) {
 		req.on('end', function() {
 			res.writeHead(200,{'content-type':'application/json'});
 			var requestBody = JSON.parse(requestData);
-			var filePath=path.join(home,'db','savedGame');
+			var filePath=path.join(home,'db','savedGame.json');
 			if(requestBody.action=='load') {
 				console.log('API request type: load');
 				fs.exists(filePath, function (exists) {
@@ -117,12 +117,14 @@ var PpNodeServer={
 	server: null,
 	key: null,
 	home: null,
-	start: function(port, homedir) {
+	mode: null,
+	start: function(port, homedir, serverMode) {
 		var http=require('http');
 		var path=require('path');
 		this.port=port;
 		this.key=(new Date()).getTime();
 		this.home=(homedir==null?".":homedir);
+		this.mode=serverMode;
 		
 		this.server=http.createServer(function(req, res) {
 			var parsedUrl=require('url').parse(req.url, true);
